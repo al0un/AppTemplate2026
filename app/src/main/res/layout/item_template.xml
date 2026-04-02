@@ -6,29 +6,46 @@
     android:padding="8dp">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:padding="8dp">
 
         <ImageView
             android:id="@+id/item_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginEnd="8dp"
+            android:scaleType="centerCrop" />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
+
 
             <TextView
-                android:id="@+id/item_endereco"
+                android:id="@+id/item_marca"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Endereço:"
+                android:text="Marca:"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_tamanho"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tamanho:"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_material"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Material:"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

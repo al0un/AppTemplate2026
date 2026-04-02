@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">App do alon</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="app_name">App de Relogios</string>
+    <string name="title_home">Tela Inicial</string>
+    <string name="title_dashboard">Cadastro de Relógio</string>
     <string name="title_notifications">Notifications</string>
-    <string name="title_profile">Profile</string>
-    <string name="title_itens">Itens</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_itens">Relógios</string>
 </resources>

@@ -29,12 +29,14 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
-    private lateinit var enderecoEditText: EditText
+    private lateinit var marcaEditText: EditText
     private lateinit var itemImageView: ImageView
     private var imageUri: Uri? = null
 
+    private lateinit var tamanhoEditText: EditText
 
-    //TODO("Declare aqui as outras variaveis do tipo EditText que foram inseridas no layout")
+    private lateinit var materialEditText: EditText
+
     private lateinit var salvarButton: Button
     private lateinit var selectImageButton: Button
     private lateinit var databaseReference: DatabaseReference
@@ -66,9 +68,9 @@ class DashboardFragment : Fragment() {
         itemImageView = view.findViewById(R.id.image_item)
         salvarButton = view.findViewById(R.id.salvarItemButton)
         selectImageButton = view.findViewById(R.id.button_select_image)
-        enderecoEditText = view.findViewById(R.id.enderecoItemEditText)
-        //TODO("Capture aqui os outro campos que foram inseridos no layout. Por exemplo, ate
-        // o momento so foi capturado o endereco (EditText)")
+        marcaEditText = view.findViewById(R.id.marcaItemEditText)
+        tamanhoEditText = view.findViewById(R.id.tamanhoItemEditText)
+        materialEditText = view.findViewById(R.id.materialItemEditText)
 
         auth = FirebaseAuth.getInstance()
 
@@ -96,10 +98,11 @@ class DashboardFragment : Fragment() {
     }
 
     private fun salvarItem() {
-        //TODO("Capture aqui o conteudo que esta nos outros editTexts que foram criados")
-        val endereco = enderecoEditText.text.toString().trim()
+        val marca = marcaEditText.text.toString().trim()
+        val tamanho = tamanhoEditText.text.toString().trim()
+        val material = materialEditText.text.toString().trim()
 
-        if (endereco.isEmpty() || imageUri == null) {
+        if (marca.isEmpty() || tamanho.isEmpty() || material.isEmpty() || imageUri == null) {
             Toast.makeText(context, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT)
                 .show()
             return
@@ -116,10 +119,11 @@ class DashboardFragment : Fragment() {
 
             if (bytes != null) {
                 val base64Image = Base64.encodeToString(bytes, Base64.DEFAULT)
-                val endereco = enderecoEditText.text.toString().trim()
-                //TODO("Capture aqui o conteudo que esta nos outros editTexts que foram criados")
+                val marca = marcaEditText.text.toString().trim()
+                val tamanho = tamanhoEditText.text.toString().trim()
+                val material = materialEditText.text.toString().trim()
 
-                val item = Item(endereco, base64Image)
+                val item = Item(marca, tamanho, material, base64Image)
 
                 saveItemIntoDatabase(item)
             }
@@ -139,23 +143,21 @@ class DashboardFragment : Fragment() {
     }
 
     private fun saveItemIntoDatabase(item: Item) {
-        //TODO("Altere a raiz que sera criada no seu banco de dados do realtime database.
-        // Renomeie a raiz itens")
-        databaseReference = FirebaseDatabase.getInstance().getReference("itens")
+        databaseReference = FirebaseDatabase.getInstance().getReference("relogios")
 
         // Cria uma chave unica para o novo item
         val itemId = databaseReference.push().key
         if (itemId != null) {
             databaseReference.child(auth.uid.toString()).child(itemId).setValue(item)
                 .addOnSuccessListener {
-                    Toast.makeText(context, "Item cadastrado com sucesso!", Toast.LENGTH_SHORT)
+                    Toast.makeText(context, "Relógio cadastrado com sucesso!", Toast.LENGTH_SHORT)
                         .show()
                     requireActivity().supportFragmentManager.popBackStack()
                 }.addOnFailureListener {
-                    Toast.makeText(context, "Falha ao cadastrar o item", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Falha ao cadastrar o Relógio ", Toast.LENGTH_SHORT).show()
                 }
         } else {
-            Toast.makeText(context, "Erro ao gerar o ID do item", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Erro ao gerar o ID do Relógio", Toast.LENGTH_SHORT).show()
         }
     }
 }
